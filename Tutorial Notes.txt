@@ -1,0 +1,17 @@
+Notes from thenewboston git tutorial
+
+The Git bash shell is like any other linux/unix shell, so 
+$pwd prints the working directory, 
+$cd ~ changes to the home directory, 
+$ls -la lists all files including hidden ones, etc. $clear clears the screen
+
+Initialize an empty repo in the current directory
+$git init
+
+Add all directory changes to the project
+$git add .
+
+Commit the changes
+$git commit -m "message here"
+
+
