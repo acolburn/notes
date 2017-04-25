@@ -4,14 +4,29 @@ The Git bash shell is like any other linux/unix shell, so
 $pwd prints the working directory, 
 $cd ~ changes to the home directory, 
 $ls -la lists all files including hidden ones, etc. $clear clears the screen
+$[up arrow] shows previous command
+
+Setting up
+$git config --global user.email "you@example.com"
+$git config --global user.name "Your Name"
 
 Initialize an empty repo in the current directory
 $git init
 
-Add all directory changes to the project
+Add all directory changes to the project staging area
+(working file>>staging area>>repo)
 $git add .
 
-Commit the changes
+Add a single file to the project staging area
+$git add aSingleFile
+
+Commit the changes from staging area to repo
 $git commit -m "message here"
+
+View commit history
+$git log
+$git log --author="A Name" (commits by A. Name only)
+
+
 
 
