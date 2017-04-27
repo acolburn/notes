@@ -66,5 +66,10 @@ $git push -u origin master
 (first line makes "origin" short version for URL we're pushing to, a repo called "notes")
 (seconed line pushes everything)
 
+Clone existing GitHub repository
+[cd to desired location]
+$git clone https://github.com/acolburn/notes.git Notes
+where Notes is a folder to hold files
+Note: new folder is NOT a repo
 
 
