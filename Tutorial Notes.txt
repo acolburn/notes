@@ -23,6 +23,9 @@ $git add aSingleFile
 Commit the changes from staging area to repo
 $git commit -m "message here"
 
+Add changed files to staging area and commit them
+$git commit -am "message here" (don't use this if changes include things like new, deleted, or moved files)
+
 Compare repo and working directory
 $git status
 
@@ -45,6 +48,9 @@ Rename or move a file (within working directory)
 $git mv oldFileName newFileNameOrPath
 $git commit
 (mv moves/renames file in working directory and puts the change in staging area ... must still commit)
+
+Revert a file changed in working directory to version in from last commit
+$git checkout -- aChangedFileName
 
 
 
