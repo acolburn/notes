@@ -74,5 +74,25 @@ Clone existing GitHub repository
 $git clone https://github.com/acolburn/notes.git Notes
 where Notes is a folder to hold files
 
+============================================
+TYPICAL WORKFLOW
+
+$git init
+$git add .
+$git commit -m "initial commit" <create repo, stage files, initial commit>
+----------
+$git commit -am "message" <commit changes>
+----------
+$git tag v1.0 -m "optional message" <tag version>
+----------
+$git git branch <see list of branches>
+----------
+$git git branch new-branch
+$git git checkout new-branch <make branch (copy), switch to it ... now commit, etc.>
+----------
+$git checkout master <switch back to master>
+----------
+$git merge new-branch <merge new-branch to master>
+
 
 
