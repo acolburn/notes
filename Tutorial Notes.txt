@@ -3,7 +3,8 @@ Notes from thenewboston git tutorial
 The Git bash shell is like any other linux/unix shell, so 
 $pwd prints the working directory, 
 $cd ~ changes to the home directory, 
-$ls -la lists all files including hidden ones, etc. $clear clears the screen
+$ls -la lists all files including hidden ones, etc. 
+$clear clears the screen
 $[up arrow] shows previous command
 
 Setting up
