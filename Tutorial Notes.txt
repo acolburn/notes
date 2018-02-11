@@ -1,9 +1,11 @@
 Notes from thenewboston git tutorial
+(see also http://41j.com/blog/2015/02/common-git-screwupsquestions-solutions/)
 
 The Git bash shell is like any other linux/unix shell, so 
 $pwd prints the working directory, 
 $cd ~ changes to the home directory, 
-$ls -la lists all files including hidden ones, etc. $clear clears the screen
+$ls -la lists all files including hidden ones, etc. 
+$clear clears the screen
 $[up arrow] shows previous command
 
 Setting up
@@ -63,9 +65,23 @@ Unstage a file
 (file is still changed, still in working directory, just not staged for commit)
 $git reset HEAD aFileName
 
-Revert file to previous version
+Revert file to previous version (before the file's been committed)
 $git checkout abcd -- aFileName
 where abcd is first few chars of desired version's unique commit ID, and aFileName is file being reverted. Note: working directory will change; directory needs to be staged and committed.
+
+Revert all files to previous commit
+$git revert abcd
+where abcd is first few chars of desired version's unique commit ID. A new commit will be generated, and it'll be just like the abcd commit.
+Alternatively,
+$git reset --hard abcd
+will move everything back to the condition it was at commit abcd, more or less erasing the intervening commits. This only works for rolling back to commits on the same branch.
+
+Magic time machine:
+$git reflog
+# you will see a list of every thing you've done in git, across all branches!
+# each one has an index HEAD@{index}
+# find the one before you broke everything
+$git reset HEAD@{index}
 
 After creating a GitHub repository, to push an existing repository
 $git remote add origin https://github.com/acolburn/notes.git
@@ -89,10 +105,10 @@ $git commit -am "message" <commit changes>
 ----------
 $git tag v1.0 -m "optional message" <tag version>
 ----------
-$git git branch <see list of branches>
+$git branch <see list of branches>
 ----------
-$git git branch new-branch
-$git git checkout new-branch <make branch (copy), switch to it ... now commit, etc.>
+$git branch new-branch
+$git checkout new-branch <make branch (copy), switch to it ... now commit, etc.>
 ----------
 $git checkout master <switch back to master>
 ----------
