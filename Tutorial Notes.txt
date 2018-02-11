@@ -36,6 +36,9 @@ $git log --author="A Name" (commits by A. Name only)
 See differences between unstaged files in the working directory and repo
 $git diff
 
+To see changes between current file and most recently committed one:
+$git diff HEAD -- <filename>
+
 See differences between staged files and repo
 $git diff --staged
 
@@ -51,6 +54,7 @@ $git commit
 
 Revert a file changed in working directory (and not yet committed) to version from last commit, ie, undo changes
 $git checkout -- aChangedFileName <note spaces before and after "--">
+[or $git checkout HEAD -- aChangedFileName]
 OR
 $git reset --hard <affects all files in working dir currently under version control>
 $git clean -f <deletes any new files in working dir since last commit>
@@ -93,6 +97,7 @@ $git git checkout new-branch <make branch (copy), switch to it ... now commit, e
 $git checkout master <switch back to master>
 ----------
 $git merge new-branch <merge new-branch to master>
+(optional: $git branch -d new-branch ... deletes new-branch)
 
 
 
