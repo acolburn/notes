@@ -2,118 +2,119 @@ Notes from thenewboston git tutorial
 (see also http://41j.com/blog/2015/02/common-git-screwupsquestions-solutions/)
 
 The Git bash shell is like any other linux/unix shell, so 
-$pwd prints the working directory, 
-$cd ~ changes to the home directory, 
-$ls -la lists all files including hidden ones, etc. 
-$clear clears the screen
-$[up arrow] shows previous command
+$ pwd prints the working directory, 
+$ cd ~ changes to the home directory, 
+$ ls -la lists all files including hidden ones, etc. 
+$ clear clears the screen
+$ [up arrow] shows previous command
 
 Setting up
-$git config --global user.email "you@example.com"
-$git config --global user.name "Your Name"
+$ git config --global user.email "you@example.com"
+$ git config --global user.name "Your Name"
 
 Initialize an empty repo in the current directory
-$git init
+$ git init
 
 Add all directory changes to the project staging area
 (working file>>staging area>>repo)
-$git add .
+$ git add .
 
 Add a single file to the project staging area
-$git add aSingleFile
+$ git add aSingleFile
 
 Commit the changes from staging area to repo
-$git commit -m "message here"
+$ git commit -m "message here"
 
 Add changed files to staging area and commit them
-$git commit -am "message here" (don't use this if changes include things like new, deleted, or moved files)
+$ git commit -am "message here" (don't use this if changes include new, deleted, or moved files)
 
 Compare repo and working directory
-$git status
+$ git status
 
 View commit history
-$git log
-$git log --author="A Name" (commits by A. Name only)
+$ git log
+$ git log --author="A Name" (commits by A. Name only)
+$ git log --oneline 
 
 See differences between unstaged files in the working directory and repo
-$git diff
+$ git diff
 
 To see changes between current file and most recently committed one:
-$git diff HEAD -- <filename>
+$ git diff HEAD -- <filename>
 
 See differences between staged files and repo
-$git diff --staged
+$ git diff --staged
 
 Delete a file
-$git rm aFileName 
-$git commit
+$ git rm aFileName 
+$ git commit
 (rm removes file in working directory and puts the change in staging area ... must still commit)
 
 Rename or move a file (within working directory)
-$git mv oldFileName newFileNameOrPath
-$git commit
+$ git mv oldFileName newFileNameOrPath
+$ git commit
 (mv moves/renames file in working directory and puts the change in staging area ... must still commit)
 
 Revert a file changed in working directory (and not yet committed) to version from last commit, ie, undo changes
-$git checkout -- aChangedFileName <note spaces before and after "--">
-[or $git checkout HEAD -- aChangedFileName]
+$ git checkout -- aChangedFileName <note spaces before and after "--">
+[or $ git checkout HEAD -- aChangedFileName]
 OR
-$git reset --hard <affects all files in working dir currently under version control>
-$git clean -f <deletes any new files in working dir since last commit>
+$ git reset --hard <affects all files in working dir currently under version control>
+$ git clean -f <deletes any new files in working dir since last commit>
 
 Unstage a file
 (file is still changed, still in working directory, just not staged for commit)
-$git reset HEAD aFileName
+$ git reset HEAD aFileName
 
 Revert file to previous version (before the file's been committed)
-$git checkout abcd -- aFileName
+$ git checkout abcd -- aFileName
 where abcd is first few chars of desired version's unique commit ID, and aFileName is file being reverted. Note: working directory will change; directory needs to be staged and committed.
 
 Revert all files to previous commit
-$git revert abcd
+$ git revert abcd
 where abcd is first few chars of desired version's unique commit ID. A new commit will be generated, and it'll be just like the abcd commit.
 Alternatively,
-$git reset --hard abcd
+$ git reset --hard abcd
 will move everything back to the condition it was at commit abcd, more or less erasing the intervening commits. This only works for rolling back to commits on the same branch.
 
 Magic time machine:
-$git reflog
+$ git reflog
 # you will see a list of every thing you've done in git, across all branches!
 # each one has an index HEAD@{index}
 # find the one before you broke everything
-$git reset HEAD@{index}
+$ git reset HEAD@{index}
 
 After creating a GitHub repository, to push an existing repository
-$git remote add origin https://github.com/acolburn/notes.git
-$git push -u origin master
+$ git remote add origin https://github.com/acolburn/notes.git
+$ git push -u origin master
 (first line makes "origin" short version for URL we're pushing to, a repo called "notes")
 (seconed line pushes everything)
 
 Clone existing GitHub repository
 [cd to desired location]
-$git clone https://github.com/acolburn/notes.git Notes
+$ git clone https://github.com/acolburn/notes.git Notes
 where Notes is a folder to hold files
 
 ============================================
 TYPICAL WORKFLOW
 
-$git init
-$git add .
-$git commit -m "initial commit" <create repo, stage files, initial commit>
+$ git init
+$ git add .
+$ git commit -m "initial commit" <create repo, stage files, initial commit>
 ----------
-$git commit -am "message" <commit changes>
+$ git commit -am "message" <commit changes>
 ----------
-$git tag v1.0 -m "optional message" <tag version>
+$ git tag v1.0 -m "optional message" <tag version>
 ----------
-$git branch <see list of branches>
+$ git branch <see list of branches>
 ----------
-$git branch new-branch
-$git checkout new-branch <make branch (copy), switch to it ... now commit, etc.>
+$ git branch new-branch
+$ git checkout new-branch <make branch (copy), switch to it ... now commit, etc.>
 ----------
-$git checkout master <switch back to master>
+$ git checkout master <switch back to master>
 ----------
-$git merge new-branch <merge new-branch to master>
-(optional: $git branch -d new-branch ... deletes new-branch)
+$ git merge new-branch <merge new-branch to master>
+(optional: $ git branch -d new-branch ... deletes new-branch)
 
 
 
