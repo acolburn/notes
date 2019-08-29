@@ -20,7 +20,7 @@ Add all directory changes to the project staging area
 $ git add .
 
 Add a single file to the project staging area
-$ git add aSingleFile
+$ git add aSingleFile.txt
 
 Commit the changes from staging area to repo
 $ git commit -m "message here"
@@ -33,14 +33,13 @@ $ git status
 
 View commit history
 $ git log
-$ git log --author="A Name" (commits by A. Name only)
 $ git log --oneline 
 
 See differences between unstaged files in the working directory and repo
 $ git diff
 
 To see changes between current file and most recently committed one:
-$ git diff HEAD -- <filename>
+$ git diff HEAD -- <filename.txt>
 
 See differences between staged files and repo
 $ git diff --staged
@@ -55,23 +54,24 @@ $ git mv oldFileName newFileNameOrPath
 $ git commit
 (mv moves/renames file in working directory and puts the change in staging area ... must still commit)
 
-HELP! I tried something, it didn't work. I haven't committed my screwy changes, and I just want to go back
-where I was the last time I committed:
-$ git reset -- hard
-(opt.) $ git clean -f //deletes any new files in working dir since last commit
+HELP! I tried something, it didn't work. I just want to go back
+where it was:
+[Let's assume commit abc123 is where you want to return]
+$ git reset -- hard abc123
+$ git reset -- soft HEAD@{1}
+$ git commit -m "back to good point with new commit"
+[Result is commit log includes abc123, the screwed up stuff, and a new commit that's just like abc123. If necessary you can still reset back to the screwed up stuff.]
 
-OR you can also revert a file changed in working directory (and not yet committed) to version from last commit, ie, undo changes
-$ git checkout -- aChangedFileName //note spaces before and after "--"
-[or $ git checkout HEAD -- aChangedFileName]
-
+OR you can also revert a file changed in working directory (and not yet committed) to version from last commit, ie, undo changes. Note: working directory will change; directory needs to be staged and committed:
+$ git checkout -- aChangedFileName.txt 
+[or $ git checkout HEAD -- aChangedFileName.txt //same thing]
+[or $ git checkout abcd -- aFileName.txt]
+where abcd is first few chars of desired version's unique commit ID, and aFileName is file being reverted. 
 
 Unstage a file
 (file is still changed, still in working directory, just not staged for commit)
 $ git reset HEAD aFileName
 
-Revert file to previous version (before the file's been committed)
-$ git checkout abcd -- aFileName
-where abcd is first few chars of desired version's unique commit ID, and aFileName is file being reverted. Note: working directory will change; directory needs to be staged and committed.
 
 Revert all files to previous commit
 $ git revert abcd
