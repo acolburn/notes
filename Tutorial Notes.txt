@@ -56,11 +56,20 @@ $ git commit
 
 HELP! I tried something, it didn't work. I just want to go back
 where it was:
-[Let's assume commit abc123 is where you want to return]
+
+I changed test.txt. I saved it, but it has not yet been added (staged) or committed:
+$ git checkout test.txt
+
+I changed test.txt, saved it, and committed it: 
+$ git commit -m "This is a commit I want to get rid of"
+Now I want to "undo" my last commit, in a way that the original commit and the "undoing" commit are visible in history:
+$ git revert HEAD
+
+I want to go back to the way things were after commit abc123:
 $ git reset --hard abc123
 $ git reset --soft HEAD@{1}
 $ git commit -m "back to good point with new commit"
-[Result is commit log includes abc123, the screwed up stuff, and a new commit that's just like abc123. If necessary you can still reset back to the screwed up stuff.]
+[Result is commit log includes abc123, the screwed up stuff, and a new commit that's just like abc123. If necessary you can still reset back to the screwed up stuff. Remember, $ git log --all let's you see everything that's been done]
 
 Works with Magic Time Machine, too:
 $ git reflog
