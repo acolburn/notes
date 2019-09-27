@@ -69,7 +69,13 @@ I want to go back to the way things were after commit abc123:
 $ git reset --hard abc123
 $ git reset --soft HEAD@{1}
 $ git commit -m "back to good point with new commit"
-[Result is commit log includes abc123, the screwed up stuff, and a new commit that's just like abc123. If necessary you can still reset back to the screwed up stuff. Remember, $ git log --all let's you see everything that's been done]
+[Result:
+git log --oneline
+bb77 back to good point with new commit
+2c7f bad commit
+abc1 way things were
+So, if necessary you can still reset back to the screwed up stuff. Remember, 
+$ git log --all let's you see everything that's been done]
 
 Works with Magic Time Machine, too:
 $ git reflog
@@ -80,24 +86,27 @@ $ git reset --hard HEAD@{index}
 $ git reset --soft HEAD@{1}
 $ git commit -m "I just reset to previous commit"
 
+Another option, if you wanted to go back to commit abc123 and not worry about detaching HEADS:
+$git checkout -b test-branch abc123  //creates and checks out a new branch, starting with commit abc123
+...look at commit abc123, do stuff with it, whatever ... when you want to get rid of it:
+$git checkout master
+$git branch -d test-branch //deletes new branch
+
 OR you can also revert a file changed in working directory (and not yet committed) to version from last commit, ie, undo changes. Note: working directory will change; directory needs to be staged and committed:
 $ git checkout -- aChangedFileName.txt 
 [or $ git checkout HEAD -- aChangedFileName.txt //same thing]
-[or $ git checkout abcd -- aFileName.txt]
-where abcd is first few chars of desired version's unique commit ID, and aFileName is file being reverted. 
+
+Remove what was done during a particular commit:
+$ git revert <SHA of commit you want to discard>
+$ git commit -am "After revert"
 
 Unstage a file
 (file is still changed, still in working directory, just not staged for commit)
 $ git reset HEAD aFileName
 
-
-Revert all files to previous commit
-$ git revert abcd
-where abcd is first few chars of desired version's unique commit ID. A new commit will be generated, and it'll be just like the abcd commit.
-Alternatively,
+Reset all files to previous commit
 $ git reset --hard abcd
 will move everything back to the condition it was at commit abcd, more or less erasing the intervening commits. This only works for rolling back to commits on the same branch.
-
 
 
 After creating a GitHub repository, to push an existing repository
