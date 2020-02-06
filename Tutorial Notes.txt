@@ -54,6 +54,21 @@ $ git mv oldFileName newFileNameOrPath
 $ git commit
 (mv moves/renames file in working directory and puts the change in staging area ... must still commit)
 
+MERGE CONFLICTS
+1. View the merge conflict:
+<<<HEAD
+  (portion of code on head, i.e., new addition)
+====
+  (portion on last committed change, i.e., old version)
+>>>>9d9c62
+
+2. Manually fix and save, then:
+$ git add --all
+$ git commit -m "message"
+$ git push
+
+
+
 HELP! I tried something, it didn't work. I just want to go back
 where it was:
 
