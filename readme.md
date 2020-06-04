@@ -100,13 +100,20 @@ $ git commit -m "message"
 
 
 
-
 HELP! I tried something, it didn't work. I just want to go back
 where it was:
 
 I changed test.txt. I saved it, but it has not yet been added (staged) or committed:
+
+```
+$ git reset HEAD aFileName
+```
+
+Or
+
 ```
 $ git checkout test.txt
+$ git checkout HEAD test.txt //same thing
 ```
 
 I changed test.txt, saved it, and committed it: 
@@ -118,7 +125,16 @@ Now I want to "undo" this last commit, in a way that the original commit and the
 $ git revert HEAD
 ```
 
-I want to go back to the way things were after commit abc123:
+Reset all files to previous commit
+
+```
+$ git reset --hard abcd
+```
+
+will move everything back to the condition it was at commit abcd, more or less erasing the intervening commits. This only works for rolling back to commits on the same branch.
+
+I want to go back to the way things were after commit abc123 but still have everything safely reflected in my log:
+
 ```
 $ git reset --hard abc123
 $ git reset --soft HEAD@{1}
@@ -128,14 +144,18 @@ $ git commit -m "back to good point with new commit"
 ```
 git log --oneline
 ```
-bb77 back to good point with new commit
-2c7f bad commit
-abc1 way things were
+`bb77 back to good point with new commit`
+`2c7f bad commit`
+`abc1 way things were`
+
 So, if necessary you can still reset back to the screwed up stuff. Remember,
+
 ``` 
 $ git log --all 
 ```
 let's you see everything that's been done]
+
+
 
 Works with Magic Time Machine, too:
 ```
@@ -149,14 +169,10 @@ $ git commit -m "I just reset to previous commit"
 ```
 
 Another option, if you wanted to go back to commit abc123 and not worry about detaching HEADS:
-$git checkout -b test-branch abc123  //creates and checks out a new branch, starting with commit abc123
-...look at commit abc123, do stuff with it, whatever ... when you want to get rid of it:
-$git checkout master
-$git branch -d test-branch //deletes new branch
-
-OR you can also revert a file changed in working directory (and not yet committed) to version from last commit, ie, undo changes. Note: working directory will change; directory needs to be staged and committed:
-$ git checkout -- aChangedFileName.txt 
-[or $ git checkout HEAD -- aChangedFileName.txt //same thing]
+`$git checkout -b test-branch abc123  //creates and checks out a new branch, starting with commit abc123`
+`...look at commit abc123, do stuff with it, whatever ... when you want to get rid of it:`
+`$git checkout master`
+`$git branch -d test-branch //deletes new branch`
 
 Remove what was done during a particular commit:
 ```
@@ -164,51 +180,41 @@ $ git revert <SHA of commit you want to discard>
 $ git commit -am "After revert"
 ```
 
-Unstage a file
-(file is still changed, still in working directory, just not staged for commit)
+
+
+Clone existing GitHub repository
+[cd to desired location]
+
 ```
-$ git reset HEAD aFileName
+$ git clone https://github.com/acolburn/notes.git Notes
 ```
 
-Reset all files to previous commit
-```
-$ git reset --hard abcd
-```
-will move everything back to the condition it was at commit abcd, more or less erasing the intervening commits. This only works for rolling back to commits on the same branch.
-
+where Notes is a folder to hold files
 
 After creating a GitHub repository, to push an existing repository
+
 ```
 $ git remote add origin https://github.com/acolburn/notes.git
 $ git push -u origin master
 ```
 (first line makes "origin" short version for URL we're pushing to, a repo called "notes")
-(seconed line pushes everything)
+(second line pushes everything)
 
-Clone existing GitHub repository
-[cd to desired location]
-```
-$ git clone https://github.com/acolburn/notes.git Notes
-```
-where Notes is a folder to hold files
+
 
 ============================================
 TYPICAL WORKFLOW
-
-$ git init
+```
+$ git init 
 $ git add .
-$ git commit -m "initial commit" <create repo, stage files, initial commit>
-----------
-$ git commit -am "message" <commit changes>
-----------
-$ git tag v1.0 -m "optional message" <tag version>
-----------
-$ git branch <see list of branches>
-----------
-$ git branch new-branch
-$ git checkout new-branch <make branch (copy), switch to it ... now commit, etc.>
-----------
-$ git checkout master <switch back to master>
-----------
-$ git merge new-branch <merge new-branch to master>
-(optional: $ git branch -d new-branch ... deletes new-branch)
+$ git git commit -m "initial commit" //create repo, stage files, initial commit
+$ git commit -am "message" //commit changes
+$ git tag v1.0 -m "tagging as version 1.0"
+$ git branch //see list of branches
+$ git branch new-branch //make new-branch
+$ git checkout new-branch //switch to new-branch
+$ git checkout master //switch back to master
+$ git merge new-branch //merge new-branch into master
+(optional: $ git branch -d new-branch //deletes new-branch)
+
+```
