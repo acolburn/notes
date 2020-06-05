@@ -202,8 +202,8 @@ $ git push -u origin master
 
 
 
-============================================
-TYPICAL WORKFLOW
+
+## TYPICAL WORKFLOW
 ```
 $ git init 
 $ git add .
